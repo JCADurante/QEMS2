@@ -1,0 +1,3 @@
+# QEMS source repository
+
+Edit src/ for backend/client transport/launchers and app/index.template.html for the UI. Do not edit generated root deployment files as source. Build only into dist/qems-server with node scripts/build.mjs. Never erase, stage, upload or replace live data/, logs/, runtime/, seed.json, or root index.html. User records, passwords, signatures and operational baselines belong in data/, not Git. Keep concurrent-edit conflict checks and password-confirmed leadman/checker workflows intact. Run npm run check, npm run build, npm test and npm run test:portable for substantive server changes. Do not deploy to the running PC automatically.

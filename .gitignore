@@ -1,0 +1,28 @@
+# Live server and portable runtime — never commit
+/data/
+/logs/
+/runtime/
+/dist/
+/artifacts/
+node_modules/
+*.sqlite
+*.sqlite-*
+*.db
+*.log
+*.pid
+.env
+.env.*
+*.pfx
+*.pem
+*.key
+# Generated deployment files at repository root
+/index.html
+/seed.json
+/server.mjs
+/sync-core.cjs
+/server-config.json
+/start.ps1
+/Stop QEMS.ps1
+/Start QEMS.bat
+/Start QEMS.cmd
+/Stop QEMS.bat

@@ -1,0 +1,16 @@
+{
+  "name": "qems-management-system",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "build": "node scripts/build.mjs",
+    "check": "node --check src/server.mjs && node --check src/server-client.js && node --check src/sync-core.cjs",
+    "test": "node tests/server-integration.mjs",
+    "test:portable": "node tests/portable-server.mjs"
+  }
+}
