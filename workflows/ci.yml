@@ -1,0 +1,46 @@
+name: Test and Package QEMS
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: qems-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  windows-portable:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Check JavaScript
+        run: npm run check
+      - name: Build portable Windows server
+        run: npm run build
+      - name: Test shared server and conflicts
+        run: npm test
+      - name: Test one-click portable startup
+        run: npm run test:portable
+      - name: Create portable ZIP
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force artifacts | Out-Null
+          Compress-Archive -LiteralPath dist/qems-server -DestinationPath artifacts/QEMS-Portable-Windows.zip
+      - name: Upload tested portable package
+        uses: actions/upload-artifact@v7
+        with:
+          name: QEMS-Portable-Windows
+          path: artifacts/QEMS-Portable-Windows.zip
+          if-no-files-found: error
+          retention-days: 14
